@@ -10,6 +10,7 @@ spec:
   template:
     metadata:
       labels:
+        redis-node: "true"
         name: redis
         role: replica
 {{ include "labels.standard" . | indent 8 }}
@@ -19,6 +20,16 @@ spec:
         image: "{{ .Values.redis_image }}"
         resources:
 {{ toYaml .Values.resources.slave | indent 10 }}
+
+        readinessProbe:
+          exec:
+            command: 
+            # - "true"
+              - sh
+              - -c
+              # - "redis-cli info |grep -q 'role:master'"
+              - "redis-cli info|grep -q $(redis-cli -h redis-sentinel -p 26379 --raw  sentinel master mymaster|grep runid -A1|tail -1)"
+
         ports:
         - containerPort: 6379
         volumeMounts:

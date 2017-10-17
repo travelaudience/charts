@@ -32,6 +32,15 @@ spec:
           ports:
             - containerPort: 6379
 
+          readinessProbe:
+            exec:
+              command: 
+              # - "true"
+              - sh
+              - -c
+              # - "redis-cli info |grep -q 'role:master'"
+              - "redis-cli info|grep -q $(redis-cli -h redis-sentinel -p 26379 --raw  sentinel master mymaster|grep runid -A1|tail -1)"
+
           volumeMounts:
             - mountPath: /redis-master-data
               name: data

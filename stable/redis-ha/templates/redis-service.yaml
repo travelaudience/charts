@@ -6,7 +6,16 @@ metadata:
     role: service
 {{ include "labels.standard" . | indent 4 }}
   name: {{ template "fullname" . }}
+  annotations:
+    {{- range $key, $value := .Values.service.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
 spec:
+  type: {{ .Values.service.type }}
+  {{ if eq .Values.service.type "LoadBalancer" -}} {{ if .Values.service.loadBalancerIP -}}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
+  {{ end -}}
+  {{- end -}}
   ports:
     - port: 6379
       targetPort: 6379
