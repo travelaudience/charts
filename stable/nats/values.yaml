@@ -1,0 +1,12 @@
+
+image: quay.io/pires/docker-nats:1.0.2
+
+imagePullPolicy: IfNotPresent
+
+service:
+  enabled: true
+  annotations: {}
+  type: ClusterIP
+  clusterIP: None
+
+replicas: 1
