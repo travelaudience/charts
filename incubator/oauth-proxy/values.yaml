@@ -4,13 +4,14 @@ config:
   clientID: "XXXXXXX"
   # OAuth client secret
   clientSecret: "XXXXXXXX"
-  # Create a new secret with the following command
-  # python -c 'import os,base64; print base64.b64encode(os.urandom(16))'
-  cookieSecret: "XXXXXXXXXX"
+  # Create a new secret with the following command,
+  #     python -c 'import os,base64; print base64.b64encode(os.urandom(16))'
+  # if not provided a slightly less secure cookieSecret will be generated
+  # cookieSecret: "XXXXXXXXXX"
 
 image:
   repository: "a5huynh/oauth2_proxy"
-  tag: "2.2"
+  tag: "2.2.1"
   pullPolicy: "IfNotPresent"
 
 # Optionally specify an array of imagePullSecrets.
@@ -30,7 +31,7 @@ service:
   internalPort: 4180
 
 ingress:
-  enabled: false
+  enabled: true
   path: /
   # Used to create an Ingress record.
   # hosts:
