@@ -2,6 +2,7 @@ name: oauth-proxy
 version: 0.2.0
 appVersion: 2.2
 description: A reverse proxy that provides authentication with Google, Github or other providers
+icon: https://oauth.net/images/oauth-2-sm.png
 keywords:
 - kubernetes
 - oauth
