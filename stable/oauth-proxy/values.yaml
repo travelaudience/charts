@@ -5,8 +5,9 @@ config:
   # OAuth client secret
   clientSecret: "XXXXXXXX"
   # Create a new secret with the following command
-  # python -c 'import os,base64; print base64.b64encode(os.urandom(16))'
-  cookieSecret: "XXXXXXXXXX"
+  #     python -c 'import os,base64; print base64.b64encode(os.urandom(16))'
+  # if not provided, a less unique cookieSecret will be auto-generated
+  # cookieSecret: "XXXXXXXXXX"
 
 image:
   repository: "a5huynh/oauth2_proxy"
